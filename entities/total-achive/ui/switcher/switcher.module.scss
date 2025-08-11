@@ -1,0 +1,42 @@
+@use '@/styles/variables.scss' as *;
+
+.achiveList {
+    display: flex;
+    overflow-x: auto;
+}
+
+.achiveItem {
+    flex-grow: 1;
+    min-width: 180px;
+    min-height: 79px;
+    color: $font-color-secondary;
+}
+.active {
+    border: 1px solid rgba($col-gold-lite, 0.5);
+    border-radius: 12px;
+    .title {
+        color: white;
+    }
+}
+.info {
+    align-items: center;
+}
+
+.id {
+    color: $col-gold-lite;
+}
+.count {
+    color: $col-gray;
+}
+
+.btn {
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    padding: 16px;
+}
+.info {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+}
