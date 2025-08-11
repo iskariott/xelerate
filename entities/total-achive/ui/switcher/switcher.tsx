@@ -1,22 +1,25 @@
 import { useState } from 'react';
 import st from './switcher.module.scss';
+import { useAchieveContext } from '@/shared/store/user-achieve-store';
+import Loader from '@/shared/ui/loader/loader';
 
 export default function Switcher() {
+    const ctx = useAchieveContext();
     const btnList = [
         {
             id: '01',
             title: 'Всі досягнення',
-            count: 142,
+            count: ctx?.state?.userAchieveCount,
         },
         {
             id: '02',
             title: 'Досягнення на платформі',
-            count: 56,
+            count: ctx?.state?.platformAchieves.length,
         },
         {
             id: '03',
             title: 'Досягнення спеціаліста',
-            count: 83,
+            count: ctx?.state?.proAchieves.length,
         },
     ];
     const [selected, setSelected] = useState<string>(btnList[0].id);
@@ -30,7 +33,7 @@ export default function Switcher() {
                         <span className={st.id}>{item.id}</span>
                         <div className={st.info}>
                             <span className={st.title}>{item.title}</span>
-                            <span className={st.count}>{item.count}</span>
+                            <span className={st.count}>{ctx?.state ? item.count : <Loader />}</span>
                         </div>
                     </button>
                 </li>

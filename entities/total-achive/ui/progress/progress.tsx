@@ -1,8 +1,14 @@
 import st from './progress.module.scss';
 import ProgressBar from '@/features/progress-bar/ui/progress-bar';
+import { useAchieveContext } from '@/shared/store/user-achieve-store';
 import GradientEffefct from '@/shared/ui/gradient-effect/gradient-effefct';
+import Loader from '@/shared/ui/loader/loader';
 
 export default function Progress() {
+    const ctx = useAchieveContext();
+    const userAchieveCount = ctx?.state?.userAchieveCount;
+    const totalAchieveCount = ctx?.state?.totalCount;
+
     return (
         <div className={st.container}>
             <div className={st.progress}>
@@ -11,11 +17,24 @@ export default function Progress() {
                     <h3>ВІДКРИТО ДОСЯГНЕНЬ</h3>
                 </div>
                 <div className={st.value}>
-                    18<span>{` / 143`}</span>
+                    {ctx?.state ? (
+                        <>
+                            {userAchieveCount}
+                            <span>{` / ${totalAchieveCount}`}</span>
+                        </>
+                    ) : (
+                        <Loader />
+                    )}
                 </div>
             </div>
             <div className={st.progressBar}>
-                <ProgressBar value={30} height="32px" borderRadius="4px" isLinesDivider />
+                <ProgressBar
+                    value={userAchieveCount}
+                    max={totalAchieveCount}
+                    height="32px"
+                    borderRadius="4px"
+                    isLinesDivider
+                />
                 <GradientEffefct
                     top="0px"
                     bottom="0px"

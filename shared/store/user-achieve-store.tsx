@@ -1,5 +1,5 @@
 import { tUserAchive } from '@/shared/types/achievments';
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 type tContext = {
     state: tUserAchive | undefined;
@@ -11,9 +11,13 @@ const Context = createContext<tContext | undefined>(undefined);
 export const UserAchiveProvider = ({ children }: { children: ReactNode }) => {
     const [state, setState] = useState<tUserAchive | undefined>(undefined);
     async function getData() {
-        await fetch('/api/user-achive')
-            .then((r) => r.json())
-            .then((r) => setState(r));
+        try {
+            await fetch('/api/user-achive')
+                .then((r) => r.json())
+                .then((r) => setState(r));
+        } catch (error) {
+            console.error(error);
+        }
     }
     useEffect(() => {
         const controller = new AbortController();
@@ -23,3 +27,5 @@ export const UserAchiveProvider = ({ children }: { children: ReactNode }) => {
 
     return <Context.Provider value={{ state, setState }}>{children}</Context.Provider>;
 };
+
+export const useAchieveContext = () => useContext(Context);

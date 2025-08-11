@@ -1,0 +1,17 @@
+@use '@/styles/variables.scss' as *;
+
+.loader {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border: 0.15em solid $font-color-secondary;
+    border-top-color: whitesmoke;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
