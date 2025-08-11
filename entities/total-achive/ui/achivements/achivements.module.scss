@@ -1,0 +1,28 @@
+@use '@/styles/variables' as *;
+
+.container {
+    margin-top: 8px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.card {
+    background-color: $bg-secondary-color;
+    flex-direction: column;
+    border: 1px solid $border-color-mediumGray;
+    border-radius: 8px;
+    justify-content: start;
+    padding: 15px 16px;
+    min-height: 125px;
+    min-width: 145px;
+
+    span {
+        font-size: $font-lg;
+    }
+    p {
+        margin-top: 16px;
+        color: $font-color-secondary;
+    }
+}
