@@ -1,0 +1,34 @@
+.progressWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress {
+    display: flex;
+    overflow: hidden;
+    flex: 1 1 auto;
+    height: var(--bar-height);
+}
+
+.filled {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    transition: width 0.4s ease;
+    background: linear-gradient(90deg, #534434 0%, #b98756 50%, #d5ba94 100%);
+    border-radius: var(--border-radius);
+}
+
+.empty {
+    height: 100%;
+    transition: width 0.4s ease;
+    background-color: #454545;
+    border-radius: var(--border-radius);
+}
+
+.divider {
+    width: 4px;
+    background-color: transparent;
+}
