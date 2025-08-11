@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
+import Statistic from '@/widgets/ui/statistic';
 const inter = Inter({
     variable: '--font-inter',
     subsets: ['latin', 'cyrillic'],
@@ -16,7 +17,9 @@ export default function Home() {
             </Head>
 
             <div className={`background `} />
-            <div className={`${inter.className} blur`}></div>
+            <div className={`${inter.className} blur`}>
+                <Statistic />
+            </div>
         </>
     );
 }
