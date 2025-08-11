@@ -26,23 +26,19 @@ export default function Carousel() {
     useEffect(() => {
         if (!carouselRef.current || !cardRef.current) return;
         const carouselWidth = carouselRef.current.offsetWidth;
-        console.log('carouselWidth = ', carouselWidth);
         const cardWidth = cardRef.current.offsetWidth;
         setCardWidth(cardWidth);
-        console.log('cardWidth = ', cardWidth);
         const visible = Math.floor(carouselWidth / cardWidth);
         setVisibleCards(visible || 1);
     }, []);
 
     const maxIndex = cardsInRowLength - visibleCards;
-    console.log('visibleCards = ', visibleCards);
 
     const goToSlide = (index: number) => {
         if (index < 0) index = 0;
         if (index > maxIndex) index = maxIndex;
         setActiveIndex(index);
     };
-    console.log('activeIndex = ', activeIndex);
     return (
         <div className={styles.carouselWrapper}>
             <div className={styles.carousel} ref={carouselRef}>
