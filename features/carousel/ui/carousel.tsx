@@ -1,27 +1,15 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { Children, ReactNode, useEffect, useRef, useState } from 'react';
 import styles from './carousel.module.scss';
-import AchiveCard from '@/shared/ui/achive-card/achive-card';
 
-interface CardData {
-    id: number;
-    title: string;
-    progress: string;
-}
-
-const cards: CardData[] = Array.from({ length: 12 }, (_, i) => ({
-    id: i,
-    title: 'Документаліст',
-    progress: `${12} / ${50}`,
-}));
-
-export default function Carousel() {
+export default function Carousel({ children }: { children: ReactNode }) {
     const [activeIndex, setActiveIndex] = useState<number>(0);
     const [visibleCards, setVisibleCards] = useState(1);
     const [cardWidth, setCardWidth] = useState<number>(197);
     const carouselRef = useRef<HTMLDivElement>(null);
     const cardRef = useRef<HTMLDivElement>(null);
-    const cardsInRowLength = cards.length / 2;
+    const childrenArray = Children.toArray(children);
+    const cardsInRowLength = childrenArray.length / 2;
 
     useEffect(() => {
         if (!carouselRef.current || !cardRef.current) return;
@@ -47,9 +35,9 @@ export default function Carousel() {
                     style={{
                         transform: `translateX(-${activeIndex * cardWidth}px)`,
                     }}>
-                    {cards.map((card, idx) => (
-                        <div key={card.id} ref={idx === 0 ? cardRef : null} className={styles.card}>
-                            <AchiveCard variant="gray">{card.id}</AchiveCard>
+                    {childrenArray.map((child, idx) => (
+                        <div key={idx} ref={idx === 0 ? cardRef : null} className={styles.card}>
+                            {child}
                         </div>
                     ))}
                 </div>
