@@ -1,0 +1,11 @@
+.gradient {
+    position: absolute;
+    background: var(--gradient);
+    top: var(--top);
+    left: var(--left);
+    right: var(--right);
+    bottom: var(--bottom);
+    width: var(--width);
+    filter: blur(var(--blur));
+    z-index: -1;
+}
