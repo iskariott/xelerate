@@ -11,6 +11,9 @@
     @include respond-to(tablet) {
         padding: 24px;
     }
+    @include respond-to(desktop) {
+        flex: 1 1 0;
+    }
 }
 .progress {
     display: flex;

@@ -15,6 +15,7 @@ export default function Statistic() {
                     <Progress />
                     <Achivements />
                 </div>
+
                 <div className={st.wp}>
                     <div className={st.bg_Sw}>
                         <Switcher />

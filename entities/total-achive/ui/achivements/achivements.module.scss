@@ -4,8 +4,13 @@
     margin-top: 8px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
-    flex-wrap: wrap;
     gap: 8px;
+
+    @include respond-to(desktop) {
+        display: flex;
+        flex: 1 1 0;
+        flex-wrap: nowrap;
+    }
 }
 
 .card {

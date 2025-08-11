@@ -17,9 +17,9 @@ export default function Home() {
             </Head>
 
             <div className={`background `} />
-            <div className={`${inter.className} blur`}>
+            <main className={`${inter.className} blur`}>
                 <Statistic />
-            </div>
+            </main>
         </>
     );
 }
