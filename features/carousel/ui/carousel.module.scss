@@ -1,0 +1,40 @@
+@use '@/styles/variables.scss' as *;
+
+.carouselWrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel {
+    width: 100%;
+    overflow: hidden;
+}
+
+.track {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 16px;
+    transition: transform 0.3s ease;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+    gap: 6px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid $col-gray;
+    cursor: pointer;
+
+    &.active {
+        background: $col-gray;
+    }
+}
