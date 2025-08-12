@@ -1,34 +1,57 @@
 'use client';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import st from './dropdown.module.scss';
 
-export default function Dropdown() {
-    const options = ['ВСІ РАНГИ', 'РАНГ 1', 'РАНГ 2', 'РАНГ 3'];
+type DropdownProps = {
+    optionList: string[];
+    setOption: (option: string) => void;
+    option: string;
+};
+
+export default function Dropdown({ optionList, setOption, option }: DropdownProps) {
     const [open, setOpen] = useState(false);
-    const [selected, setSelected] = useState<string>(options[0]);
+    const toggleRef = useRef<HTMLButtonElement>(null);
+
     const handleSelect = (option: string) => {
-        setSelected(option);
+        setOption(option);
         setOpen(false);
     };
 
-    return (
-        <div className={st.dropdown}>
-            <button className={st.toggle} onClick={() => setOpen(!open)}>
-                {selected}
-                <span className={st.arrowIcon} />
-            </button>
+    const toggleRect = toggleRef.current?.getBoundingClientRect();
 
-            {open && (
-                <ul className={st.menu}>
-                    {options
-                        .filter((o) => o !== selected)
-                        .map((opt) => (
-                            <li key={opt} onClick={() => handleSelect(opt)} className={st.item}>
-                                {opt}
-                            </li>
-                        ))}
-                </ul>
-            )}
-        </div>
+    return (
+        <>
+            <div className={st.dropdown}>
+                <button
+                    ref={toggleRef}
+                    className={st.toggle}
+                    onClick={() => setOpen((prev) => !prev)}>
+                    {option}
+                    <span className={st.arrowIcon} />
+                </button>
+            </div>
+
+            {open &&
+                createPortal(
+                    <ul
+                        className={st.menu}
+                        style={{
+                            position: 'absolute',
+                            top: (toggleRect?.bottom || 0) + window.scrollY + 22,
+                            left: (toggleRect?.left || 0) + window.scrollX,
+                            width: toggleRect?.width || 'auto',
+                        }}>
+                        {optionList
+                            .filter((opt) => opt !== option)
+                            .map((opt) => (
+                                <li key={opt} onClick={() => handleSelect(opt)} className={st.item}>
+                                    {opt}
+                                </li>
+                            ))}
+                    </ul>,
+                    document.body,
+                )}
+        </>
     );
 }

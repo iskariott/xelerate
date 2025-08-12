@@ -2,7 +2,6 @@
 
 .dropdown {
     position: relative;
-    // display: inline-block;
     width: 100%;
     height: 50px;
     display: flex;
@@ -28,15 +27,13 @@
 }
 
 .menu {
-    position: absolute;
     background-color: rgb(41, 40, 40);
-    top: calc(100% + 2px);
-    left: 0;
     list-style: none;
     padding: 4px 0;
     width: 100%;
     border-radius: 8px;
-    z-index: 10;
+    color: $col_font_secondary;
+    font-family: 'Inter';
 }
 
 .item {

@@ -4,14 +4,13 @@ export type tUserFetchData = {
     progress?: number;
 };
 
-export type tAchieveVariant = 'gold' | 'gray' | 'dark' | 'closed';
+export type tAchieveRang = 1 | 2 | 3 | 'closed';
 export type tAchieveType = 'pro' | 'platform';
 
 export type tAchieveFetchData = {
     id: number;
     type: tAchieveType;
-    rang: number;
-    variant: tAchieveVariant;
+    rang: tAchieveRang;
     describe?: string;
     total?: number;
     name: string;
@@ -19,7 +18,7 @@ export type tAchieveFetchData = {
 };
 
 export type tUserAchieve = {
-    variant: tAchieveVariant;
+    rang: tAchieveRang;
     total: number | undefined;
     describe: string | undefined;
     progress: number | undefined;
@@ -37,25 +36,3 @@ export type tUserAchieveJoined = {
     proAchieves: tUserAchieve[]; // досягнення у яких type==='pro'
     platformAchieves: tUserAchieve[]; // досягнення у яких type==='platform'
 };
-
-type s =
-    | {
-          id: number;
-          type: string;
-          rang: number;
-          variant: string;
-          name: string;
-          describe: string;
-          tooltip: string;
-          total?: undefined;
-      }
-    | {
-          id: number;
-          type: string;
-          rang: number;
-          variant: string;
-          total: number;
-          name: string;
-          tooltip: string;
-          describe?: undefined;
-      };

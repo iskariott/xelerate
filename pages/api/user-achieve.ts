@@ -2,7 +2,7 @@ import type {
     tUserAchieveJoined,
     tAchieveFetchData,
     tUserAchieve,
-    tAchieveVariant,
+    tAchieveRang,
 } from '@/modules/statistic/shared/types';
 import achieveMock from '@/modules/statistic/model/achieve.model.json';
 import userMock from '@/modules/statistic/model/user-achieve.model.json';
@@ -25,29 +25,27 @@ const joinAchieves = (): tUserAchieveJoined => {
 
         if (a.type === 'pro') {
             proAchieves.push({
-                variant: a.variant,
-                total: a.total ?? undefined,
-                describe: a.describe ?? undefined,
-                progress:
-                    (a.total && userMock.find((u) => u.achiveId === a.id)?.progress) || undefined,
+                rang: a.rang,
+                total: a.total,
+                describe: a.describe,
+                progress: a.total && userMock.find((u) => u.achiveId === a.id)?.progress,
                 name: a.name,
                 tooltip: a.tooltip,
             });
         } else {
             platformAchieves.push({
-                variant: a.variant,
-                total: a.total ?? undefined,
-                describe: a.describe ?? undefined,
-                progress:
-                    (a.total && userMock.find((u) => u.achiveId === a.id)?.progress) || undefined,
+                rang: a.rang,
+                total: a.total,
+                describe: a.describe,
+                progress: a.total && userMock.find((u) => u.achiveId === a.id)?.progress,
                 name: a.name,
                 tooltip: a.tooltip,
             });
         }
     }
 
-    platformAchieves = platformAchieves.sort((a, b) => b.variant.localeCompare(a.variant));
-    proAchieves = proAchieves.sort((a, b) => b.variant.localeCompare(a.variant));
+    platformAchieves = platformAchieves.sort((a, b) => Number(b.rang) - Number(a.rang));
+    proAchieves = proAchieves.sort((a, b) => Number(b.rang) - Number(a.rang));
 
     return {
         totalCount: achieveMock.length,

@@ -9,6 +9,8 @@
 
     @include respond-to(desktop) {
         display: flex;
+        align-items: center;
+        justify-content: center;
         flex: 1 1 0;
         flex-wrap: nowrap;
         margin-top: 0;
