@@ -1,38 +1,56 @@
-import { tAchieveFetchData } from '@/modules/statistic/shared/types/index';
+import type {
+    tUserAchieveJoined,
+    tAchieveFetchData,
+    tUserAchieve,
+} from '@/modules/statistic/shared/types';
 import achieveMock from '@/modules/statistic/model/achieve.model.json';
 import userMock from '@/modules/statistic/model/user-achieve.model.json';
-import { tUserAchieveJoined } from '@/modules/statistic/shared/types';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const joinAchieves = (): tUserAchieveJoined => {
     const userAchiveIds = new Set(userMock.map((u) => u.achiveId));
-    const userAchieves = achieveMock.filter((a) => userAchiveIds.has(a.id));
+    const achieveList = achieveMock as tAchieveFetchData[];
 
     let rangs = { rang_1_Achieves: 0, rang_2_Achieves: 0, rang_3_Achieves: 0 };
-    let proAchieves = [];
-    let platformAchieves = [];
-    const pickAchieveData = (a: tAchieveFetchData) => ({
-        variant: a.variant,
-        total: a.total,
-        describe: a.describe,
-        name: a.name,
-        tooltip: a.tooltip,
-    });
+    let proAchieves: tUserAchieve[] = [];
+    let platformAchieves: tUserAchieve[] = [];
 
-    for (let a of userAchieves) {
+    for (let a of achieveList) {
+        if (!userAchiveIds.has(a.id)) continue;
+
         if (a.rang === 1) rangs.rang_1_Achieves++;
         else if (a.rang === 2) rangs.rang_2_Achieves++;
         else if (a.rang === 3) rangs.rang_3_Achieves++;
-        if (a.type === 'pro') proAchieves.push(pickAchieveData(a));
-        else if (a.type === 'platform') platformAchieves.push(pickAchieveData(a));
+
+        if (a.type === 'pro') {
+            proAchieves.push({
+                variant: a.variant,
+                total: a.total ?? undefined,
+                describe: a.describe ?? undefined,
+                progress:
+                    (a.total && userMock.find((u) => u.achiveId === a.id)?.progress) || undefined,
+                name: a.name,
+                tooltip: a.tooltip,
+            });
+        } else {
+            platformAchieves.push({
+                variant: a.variant,
+                total: a.total ?? undefined,
+                describe: a.describe ?? undefined,
+                progress:
+                    (a.total && userMock.find((u) => u.achiveId === a.id)?.progress) || undefined,
+                name: a.name,
+                tooltip: a.tooltip,
+            });
+        }
     }
 
     return {
         totalCount: achieveMock.length,
-        userAchieveCount: userAchieves.length,
+        userAchieveCount: userMock.length,
         proAchieves,
         platformAchieves,
-        closedAchievesCount: achieveMock.length - userAchieves.length,
+        closedAchievesCount: achieveMock.length - userMock.length,
         ...rangs,
     };
 };

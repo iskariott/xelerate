@@ -4,13 +4,25 @@ export type tUserFetchData = {
     progress?: number;
 };
 
+export type tAchieveVariant = 'gold' | 'gray' | 'dark' | 'closed';
+export type tAchieveType = 'pro' | 'platform';
+
 export type tAchieveFetchData = {
     id: number;
-    type: string;
+    type: tAchieveType;
     rang: number;
-    variant: string;
-    total?: number;
+    variant: tAchieveVariant;
     describe?: string;
+    total?: number;
+    name: string;
+    tooltip: string;
+};
+
+export type tUserAchieve = {
+    variant: tAchieveVariant;
+    total: number | undefined;
+    describe: string | undefined;
+    progress: number | undefined;
     name: string;
     tooltip: string;
 };
@@ -22,20 +34,28 @@ export type tUserAchieveJoined = {
     rang_1_Achieves: number; // кількість досягнень з рангом 1
     rang_2_Achieves: number; // кількість досягнень з рангом 2
     rang_3_Achieves: number; // кількість досягнень з рангом 3
-    proAchieves: {
-        // досягнення у яких type==='pro'
-        variant: string;
-        total?: number;
-        describe?: string;
-        name: string;
-        tooltip: string;
-    }[];
-    platformAchieves: {
-        // досягнення у яких type==='platform'
-        variant: string;
-        total?: number;
-        describe?: string;
-        name: string;
-        tooltip: string;
-    }[];
+    proAchieves: tUserAchieve[]; // досягнення у яких type==='pro'
+    platformAchieves: tUserAchieve[]; // досягнення у яких type==='platform'
 };
+
+type s =
+    | {
+          id: number;
+          type: string;
+          rang: number;
+          variant: string;
+          name: string;
+          describe: string;
+          tooltip: string;
+          total?: undefined;
+      }
+    | {
+          id: number;
+          type: string;
+          rang: number;
+          variant: string;
+          total: number;
+          name: string;
+          tooltip: string;
+          describe?: undefined;
+      };
