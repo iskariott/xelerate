@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import { UserAchiveProvider } from '@/modules/statistic/shared/store/user-achieve.store';
 import { Statistic } from '@/modules/statistic/widgets';
+import { FilterProvider } from '@/modules/statistic/shared/store/filter.store';
 const inter = Inter({
     variable: '--font-inter',
     subsets: ['latin', 'cyrillic'],
@@ -20,7 +21,9 @@ export default function Home() {
             <div className={`background `} />
             <main className={`${inter.className} blur`}>
                 <UserAchiveProvider>
-                    <Statistic />
+                    <FilterProvider>
+                        <Statistic />
+                    </FilterProvider>
                 </UserAchiveProvider>
             </main>
         </>
