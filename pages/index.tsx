@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { UserAchiveProvider } from '@/modules/statistic/shared/store/user-achieve.store';
 import { Statistic } from '@/modules/statistic/widgets';
 import { FilterProvider } from '@/modules/statistic/shared/store/filter.store';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 const inter = Inter({
     variable: '--font-inter',
     subsets: ['latin', 'cyrillic'],
@@ -25,6 +26,7 @@ export default function Home() {
                         <Statistic />
                     </FilterProvider>
                 </UserAchiveProvider>
+                <SpeedInsights />
             </main>
         </>
     );
