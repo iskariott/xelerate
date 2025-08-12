@@ -1,17 +1,9 @@
 @use '@/shared/styles/variables' as *;
 @use '@/shared/styles/media.scss' as *;
+@use '@/modules/statistic/shared/styles/mixin.scss' as *;
 
 .section {
-    background-color: $col_bg_secondary;
-    backdrop-filter: blur(30px);
-    border-radius: 24px;
-    border: 1px solid $col_border_mediumGray;
-    padding: 16px;
-    margin: 8px;
-
-    @include respond-to(tablet) {
-        padding: 24px;
-    }
+    @include mSection();
 }
 
 @mixin wrapper($p, $br) {
@@ -22,32 +14,16 @@
     border-radius: $br;
 }
 
-.bg_Pr_Ach {
+.bg_Progress_Rang {
     @include wrapper(8px, 16px);
-    @include respond-to(desktop) {
-        display: flex;
-        gap: 8px;
-    }
 }
-.bg_Sw {
+
+.bg_Switcher {
     @include wrapper(4px, 16px);
 }
-.bg_Rang {
+
+.bg_SelectRang {
     @include wrapper(0px, 8px);
-}
-
-@include respond-to(desktop) {
-    .bg_Rang {
-        width: 157px;
-    }
-    .bg_Sw {
-        flex: 1;
-    }
-
-    .wp {
-        display: flex;
-        gap: 24px;
-    }
 }
 
 .title {
@@ -60,8 +36,26 @@
         top: 0;
         right: calc(-25px - 10px);
         color: $col_font_secondary;
-        @include respond-to(desktop) {
-            font-size: 20px;
-        }
+    }
+}
+
+@include respond-to(desktop) {
+    .bg_Progress_Rang {
+        display: flex;
+        gap: 8px;
+    }
+    .bg_Rang {
+        width: 157px;
+    }
+    .bg_Switcher {
+        flex: 1;
+    }
+    .container {
+        display: flex;
+        gap: 24px;
+    }
+
+    .title span {
+        font-size: 20px;
     }
 }

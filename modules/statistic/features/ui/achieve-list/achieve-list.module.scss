@@ -1,0 +1,39 @@
+@use '@/shared/styles/variables.scss' as *;
+@use '@/shared/styles/media.scss' as *;
+@use '@/modules/statistic/shared/styles/mixin.scss' as *;
+
+.section {
+    @include mSection();
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.title {
+    width: fit-content;
+    position: relative;
+    span {
+        font-size: $font_md;
+        position: absolute;
+        right: -20px;
+        top: 0;
+        @include respond-to(desktop) {
+            font-size: 20px;
+        }
+    }
+}
+
+.progress {
+    display: flex;
+    justify-content: space-between;
+}
+
+.name {
+    color: $col_goldLite;
+}
+.grayText {
+    color: $col_font_secondary;
+}
