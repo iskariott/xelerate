@@ -1,11 +1,13 @@
 import Image from 'next/image';
 import st from './achieve-card.module.scss';
 import { ReactNode } from 'react';
+import Tooltip from '@/shared/ui/tooltip/tooltip';
 
 type tCardVariant = 'gold' | 'gray' | 'dark';
 type AchieveCardProps = {
     children: ReactNode;
     variant: tCardVariant;
+    tooltip: string;
 };
 
 const Colors: { [key in tCardVariant]: [string, string] } = {
@@ -18,13 +20,15 @@ function getGradient(variant: tCardVariant) {
     return `linear-gradient(180deg, ${Colors[variant][0]} 0%, ${Colors[variant][1]} 100%)`;
 }
 
-export default function AchieveCard({ children, variant }: AchieveCardProps) {
+export default function AchieveCard({ children, variant, tooltip }: AchieveCardProps) {
     const gradient = { '--gradient': getGradient(variant) };
     return (
         <div className={st.card} style={gradient as any}>
             <div className={st.icon}>
                 <button>
-                    <Image src="/images/info.png" width={24} height={24} alt="tips" />
+                    <Tooltip text={tooltip}>
+                        <Image src="/images/info.png" width={24} height={24} alt="tips" />
+                    </Tooltip>
                 </button>
             </div>
             <div className={st.divider} />
