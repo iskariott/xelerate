@@ -8,6 +8,7 @@ import { useFilterContext } from '@/modules/statistic/shared/store/filter.store'
 
 export default function AchieveList({ type }: { type: tAchieveType }) {
     const ctx = useAchieveContext();
+    if (!ctx?.state) return <></>;
     const { filter } = useFilterContext();
 
     const isProAchieve = type === 'pro';

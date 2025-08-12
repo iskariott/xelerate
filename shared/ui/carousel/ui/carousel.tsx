@@ -18,12 +18,10 @@ export default function Carousel({ children }: { children: ReactNode }) {
         setCardWidth(cardWidth);
         const visible = Math.floor(carouselWidth / cardWidth);
         setVisibleCards(visible || 1);
-    });
+    }, [children]);
     const maxIndex = Math.ceil(cardsInRowLength - visibleCards);
 
     const goToSlide = (index: number) => {
-        // if (index < 0) index = 0;
-        // if (index > maxIndex) index = maxIndex;
         setActiveIndex(index);
     };
     return (
