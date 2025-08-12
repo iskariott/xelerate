@@ -1,0 +1,35 @@
+@use '@/shared/styles/variables' as *;
+@use '@/shared/styles/media.scss' as *;
+
+.container {
+    margin-top: 8px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+    gap: 8px;
+
+    @include respond-to(desktop) {
+        display: flex;
+        flex: 1 1 0;
+        flex-wrap: nowrap;
+        margin-top: 0;
+    }
+}
+
+.card {
+    background-color: $col_bg_secondary;
+    flex-direction: column;
+    border: 1px solid $col_border_mediumGray;
+    border-radius: 8px;
+    justify-content: start;
+    padding: 15px 16px;
+    min-height: 125px;
+    min-width: 145px;
+
+    span {
+        font-size: $font_lg;
+    }
+    p {
+        margin-top: 16px;
+        color: $col_font_secondary;
+    }
+}

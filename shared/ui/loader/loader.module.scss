@@ -1,10 +1,10 @@
-@use '@/styles/variables.scss' as *;
+@use '@/shared/styles/variables.scss' as *;
 
 .loader {
     display: inline-block;
     width: 1em;
     height: 1em;
-    border: 0.15em solid $font-color-secondary;
+    border: 0.15em solid $col_font_secondary;
     border-top-color: whitesmoke;
     border-radius: 50%;
     animation: spin 1s linear infinite;

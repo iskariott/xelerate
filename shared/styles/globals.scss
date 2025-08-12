@@ -1,0 +1,72 @@
+@use './variables.scss' as *;
+@use '@/shared/styles/media.scss' as *;
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+a,
+ul,
+li {
+    list-style: none;
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: inherit;
+}
+
+body {
+    background-color: #000000;
+    color: white;
+    font-size: 14px;
+    h1 {
+        font-size: 32px;
+    }
+    h2 {
+        font-size: 24px;
+        font-weight: 400;
+    }
+
+    @include respond-to(desktop) {
+        h1 {
+            font-size: 38px;
+        }
+        h2 {
+            font-size: 36px;
+        }
+    }
+}
+
+.background {
+    position: fixed;
+    inset: 0;
+    background-image: url('/images/bg-phone.avif');
+    background-size: cover;
+}
+
+.blur {
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(15px);
+    border-radius: 32px;
+    border: 1px solid $col_darkGray_60;
+    background-color: rgba(#0a0a0a, 0.8);
+}
+
+@media (min-width: $vp-tablet) {
+    .background {
+        background-image: url('/images/bg-tablet.avif');
+    }
+}
+@media (min-width: $vp-desktop) {
+    .background {
+        background-image: url('/images/bg-desktop.avif');
+    }
+}

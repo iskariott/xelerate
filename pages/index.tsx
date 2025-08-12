@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
-import Statistic from '@/widgets/ui/statistic';
-import { UserAchiveProvider } from '@/shared/store/user-achieve-store';
+import { UserAchiveProvider } from '@/modules/statistic/shared/store/user-achieve.store';
+import { Statistic } from '@/modules/statistic/widgets';
 const inter = Inter({
     variable: '--font-inter',
     subsets: ['latin', 'cyrillic'],
