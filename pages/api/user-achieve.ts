@@ -2,6 +2,7 @@ import type {
     tUserAchieveJoined,
     tAchieveFetchData,
     tUserAchieve,
+    tAchieveVariant,
 } from '@/modules/statistic/shared/types';
 import achieveMock from '@/modules/statistic/model/achieve.model.json';
 import userMock from '@/modules/statistic/model/user-achieve.model.json';
@@ -44,6 +45,9 @@ const joinAchieves = (): tUserAchieveJoined => {
             });
         }
     }
+
+    platformAchieves = platformAchieves.sort((a, b) => b.variant.localeCompare(a.variant));
+    proAchieves = proAchieves.sort((a, b) => b.variant.localeCompare(a.variant));
 
     return {
         totalCount: achieveMock.length,
